@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <style>
+            .chess-board { border-spacing: 0; border-collapse: collapse; }
+            .chess-board th { padding: .15em; }
+            .chess-board th + th { border-bottom: 5px solid #000; }
+            .chess-board th:first-child,
+            .chess-board td:last-child { border-right: 5px solid #000; }
+            .chess-board tr:last-child td { border-bottom: 5px solid; }
+            
+            .chess-board th:empty { border: none; }
+
+            .chess-board td   { width: 1.3em; height: 1.3em; text-align: center; font-size: 32px; line-height: 0; }
+            
+            .chess-board td:hover {background-color: greenyellow;}
+            .chess-board .light { background: #eee; }
+            .chess-board .dark { background: #aaa; }
+            .chess-board .dead { background: rgb(24, 23, 23); }
+            
+        </style>
+    </head>
+    <body>
+        <h2>add "Id" to every td element and label them with chess notations!</h2> 
+        <h3> in order to allow drag and drop of piece (fonts!)</h3>
+        
+        Rules : 
+        1. pawns can move horizontally (left and right, too). Pawns Queen only from one end of the board to the other
+        2. A White player can move any white piece during his turn. 
+        3. when a king dies, all pieces in his "kingdom" becomes immobile but remains on the board until the other same color king is mated.
+        
+        <table class="chess-board">
+            <tbody>
+                <tr>
+                    <th></th>
+                    <th>a</th>
+                    <th>b</th>
+                    <th>c</th>
+                    <th>d</th>
+                    <th>e</th>
+                    <th>f</th>
+                    <th>g</th>
+                    <th>h</th>
+                    <th>i</th>
+                    <th>j</th>
+                    <th>k</th>
+                    <th>l</th>
+                  
+                </tr>
+                <tr>
+                    <th>16</th>
+                   
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                    <td class="light">♜</td>
+                    <td class="dark">♞</td>
+                    <td class="light">♝</td>
+                    <td class="dark">♛</td>
+                    <td class="light">♚</td>
+                    <td class="dark">♝</td>
+                    <td class="light">♞</td>
+                    <td class="dark">♜</td>
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                 
+                </tr>
+                <tr>
+                    <th>15</th>
+                  
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                    <td class="dark">♟</td>
+                    <td class="light">♟</td>
+                    <td class="dark">♟</td>
+                    <td class="light">♟</td>
+                    <td class="dark">♟</td>
+                    <td class="light">♟</td>
+                    <td class="dark">♟</td>
+                    <td class="light">♟</td>
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                   
+                </tr>
+                <!-- <tr>
+                    <th>14</th>
+                   
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                   
+                 </tr>
+                 <tr>
+                    <th>13</th>
+                  
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                    </tr> -->
+                <tr>
+                    <th>12</th>
+                  
+                    <td class="light">♜</td>
+                    <td class="dark">♟</td>
+                  
+                    <td class="light" id="cell12c"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    
+                    <td class="light">♙</td>
+                    <td class="dark">♖</td>
+                   
+                    
+                   
+                   
+                </tr>
+                <tr>
+                    <th>11</th>
+                   
+                    <td class="dark">♞</td>
+                    <td class="light">♟</td>
+                  
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                  
+                    <td class="dark">♙</td>
+                    <td class="light">♘</td>
+                   
+                </tr>
+                <tr>
+                    <th>10</th>
+                    <td class="light">♝</td>
+                    <td class="dark">♟</td>
+                 
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                 
+                    <td class="light">♙</td>
+                    <td class="dark">♗</td>
+                </tr>
+                <tr>
+                    <th>9</th>
+                    <td class="dark">♛</td>
+                    <td class="light">♟</td>
+               
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                
+                    <td class="dark">♙</td>
+                    <td class="light">♕</td>
+                    <tr>
+                        <th>8</th>
+                        <td class="light">♚</td>
+                        <td class="dark">♟</td>
+                    
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                      
+                        <td class="light">♙</td>
+                        <td class="dark">♔</td>
+                    </tr>
+                    <tr>
+                        <th>7</th>
+                        <td class="dark">♝</td>
+                        <td class="light">♟</td>
+                        
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                     
+                        <td class="dark">♙</td>
+                        <td class="light">♗</td>
+                    </tr>
+                    <tr>
+                        <th>6</th>
+                        
+                        <td class="light">♞</td>
+                        <td class="dark">♟</td>
+                      
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                       
+                        <td class="light">♙</td>
+                        <td class="dark">♘</td>
+                    </tr>
+                    <tr>
+                        <th>5</th>
+                        <td class="dark">♜</td>
+                        <td class="light">♟</td>
+                     
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                        <td class="dark"></td>
+                        <td class="light"></td>
+                     
+                        <td class="dark">♙</td>
+                        <td class="light">♖</td>
+                        </tr>
+                        <!-- <tr>
+                            <th>4</th>
+                        
+                            <td class="dead"></td>
+                            <td class="dead"></td>
+                            <td class="light"></td>
+                            <td class="dark"></td>
+                            <td class="light"></td>
+                            <td class="dark"></td>
+                            <td class="light"></td>
+                            <td class="dark"></td>
+                            <td class="light"></td>
+                            <td class="dark"></td>
+                            <td class="dead"></td>
+                            <td class="dead"></td>
+                           
+                         </tr>
+                <tr>
+                    <th>3</th>
+                   
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                </tr> -->
+                <tr>
+                    <th>2</th>
+                  
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                    <td class="light">♙</td>
+                    <td class="dark">♙</td>
+                    <td class="light">♙</td>
+                    <td class="dark">♙</td>
+                    <td class="light">♙</td>
+                    <td class="dark">♙</td>
+                    <td class="light">♙</td>
+                    <td class="dark">♙</td>
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                 
+                </tr>
+                <tr>
+                    <th>1</th>
+                  
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                    <td class="dark">♖</td>
+                    <td class="light">♘</td>
+                    <td class="dark">♗</td>
+                    <td class="light">♕</td>
+                    <td class="dark">♔</td>
+                    <td class="light">♗</td>
+                    <td class="dark">♘</td>
+                    <td class="light">♖</td>
+                    <td class="dead"></td>
+                    <td class="dead"></td>
+                   
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
